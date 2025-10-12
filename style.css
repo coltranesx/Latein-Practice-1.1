@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* YENİ RENK PALETİ */
+/* RENK PALETİ */
 :root {
     --bg-color: #f8f9fa;
     --container-bg: #ffffff;
@@ -18,7 +18,7 @@ body {
     font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center; /* Varsayılan dikey hizalama */
+    align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: var(--bg-color);
@@ -49,33 +49,15 @@ h1, h2 {
 }
 .btn:hover { background-color: var(--primary-blue-hover); transform: translateY(-2px); }
 
-/* YENİ OYUN ARAYÜZÜ STİLLERİ */
-#game-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.btn-icon {
-    background: none; border: 1px solid var(--neutral-gray); color: var(--primary-text);
-    width: 40px; height: 40px; padding: 0; font-size: 1.2rem;
-    line-height: 40px; text-align: center;
-}
+/* OYUN ARAYÜZÜ STİLLERİ */
+#game-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.btn-icon { background: none; border: 1px solid var(--neutral-gray); color: var(--primary-text); width: 40px; height: 40px; padding: 0; font-size: 1.2rem; line-height: 40px; text-align: center; }
 .btn-icon:hover { background-color: var(--neutral-gray); }
 #question-counter-display { font-weight: bold; }
 
-#main-score-display {
-    margin-bottom: 1rem;
-}
-#main-score-display span {
-    font-size: 4rem;
-    font-weight: bold;
-    color: var(--primary-blue);
-}
-#main-score-display p {
-    margin: -10px 0 0 0;
-    color: var(--primary-text);
-}
+#main-score-display { margin-bottom: 1rem; }
+#main-score-display span { font-size: 4rem; font-weight: bold; color: var(--primary-blue); }
+#main-score-display p { margin: -10px 0 0 0; color: var(--primary-text); }
 
 #timer-container { width: 100%; background-color: var(--neutral-gray); border-radius: 10px; margin-bottom: 1.5rem; }
 #timer-bar { height: 10px; width: 100%; background-color: var(--soft-green); border-radius: 10px; transition: width 1s linear; }
@@ -84,6 +66,12 @@ h1, h2 {
 .btn-answer { background-color: var(--neutral-gray); color: var(--title-text); font-size: 1rem; padding: 15px; }
 .btn-answer.correct { background-color: var(--soft-green); color: white; }
 .btn-answer.wrong { background-color: var(--soft-red); color: white; }
+
+/* EKLENEN KURAL: Mobil cihazlarda tıklama sonrası kalan mavi vurguyu kaldırır */
+.btn-answer:focus, .btn-answer:focus-visible {
+    outline: none;
+}
+
 #pass-btn { background-color: var(--orange-accent); }
 #pass-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
 
@@ -101,7 +89,7 @@ h1, h2 {
 /* MOBİL İÇİN ÜST BOŞLUK DÜZELTMESİ */
 @media (max-height: 800px), (max-width: 600px) {
     body {
-        align-items: flex-start; /* Elemanları yukarı yasla */
-        padding-top: 2rem; /* Üstten biraz boşluk bırak */
+        align-items: flex-start;
+        padding-top: 2rem;
     }
 }
