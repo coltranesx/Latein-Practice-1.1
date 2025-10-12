@@ -15,30 +15,14 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: var(--bg-color);
-    color: var(--primary-text);
+    font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; margin: 0; background-color: var(--bg-color); color: var(--primary-text);
 }
-
 .container {
-    width: 90%;
-    max-width: 600px;
-    background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    text-align: center;
+    width: 90%; max-width: 600px; background-color: var(--container-bg); padding: 2rem;
+    border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center;
 }
-
-h1, h2 {
-    color: var(--title-text);
-}
-
+h1, h2 { color: var(--title-text); }
 .hidden { display: none !important; }
 
 /* Butonlar */
@@ -47,7 +31,7 @@ h1, h2 {
     border-radius: 8px; background-color: var(--primary-blue); color: white;
     font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s, transform 0.2s;
 }
-.btn:hover { background-color: var(--primary-blue-hover); transform: translateY(-2px); }
+.btn:hover { background-color: var(--primary-blue-hover); transform: translateY(-px); }
 
 /* OYUN ARAYÜZÜ STİLLERİ */
 #game-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
@@ -63,21 +47,35 @@ h1, h2 {
 #timer-bar { height: 10px; width: 100%; background-color: var(--soft-green); border-radius: 10px; transition: width 1s linear; }
 #question-word { font-size: 2.5rem; margin: 1.5rem 0; color: var(--title-text); }
 #answer-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1.5rem; }
-.btn-answer { background-color: var(--neutral-gray); color: var(--title-text); font-size: 1rem; padding: 15px; }
-.btn-answer.correct { background-color: var(--soft-green); color: white; }
-.btn-answer.wrong { background-color: var(--soft-red); color: white; }
 
-/* GÜÇLENDİRİLMİŞ KURAL: Mobil cihazlarda tıklama sonrası kalan mavi vurguyu kaldırır */
-.btn-answer, .btn-icon, .btn {
-    -webkit-tap-highlight-color: transparent; /* iOS ve Android için dokunma vurgusunu kaldırır */
+/* === NİHAİ ÇÖZÜM İÇİN CSS KODLARI === */
+.btn-answer {
+    background-color: var(--neutral-gray);
+    color: var(--title-text);
+    font-size: 1rem;
+    padding: 15px;
+    -webkit-tap-highlight-color: transparent; /* iOS/Android dokunma vurgusunu kaldır */
 }
-.btn-answer:focus, .btn-answer:focus-visible, .btn-answer:active {
-    outline: none; /* Odaklanma çerçevesini kaldırır */
-    box-shadow: none; /* Bazı tarayıcıların eklediği gölgeyi kaldırır */
+/* Mobil'deki "yapışkan hover" sorununu çözmek için hover durumunda da rengi sabit tutuyoruz */
+.btn-answer:hover, .btn-answer:focus, .btn-answer:active {
+    background-color: var(--neutral-gray); /* Rengin değişmesini engelle */
+    color: var(--title-text);
+    outline: none;
+    box-shadow: none;
 }
+.btn-answer.correct, .btn-answer.correct:hover {
+    background-color: var(--soft-green) !important; /* !important ile baskın gelmesini garantile */
+    color: white !important;
+}
+.btn-answer.wrong, .btn-answer.wrong:hover {
+    background-color: var(--soft-red) !important; /* !important ile baskın gelmesini garantile */
+    color: white !important;
+}
+/* === ÇÖZÜM SONU === */
 
 #pass-btn { background-color: var(--orange-accent); }
 #pass-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+#pass-btn:hover { background-color: #d88e1a; }
 
 /* Sonuç Ekranı */
 .congrats-message { color: var(--soft-green); margin-top: 0; margin-bottom: 1.5rem; }
@@ -92,8 +90,5 @@ h1, h2 {
 
 /* MOBİL İÇİN ÜST BOŞLUK DÜZELTMESİ */
 @media (max-height: 800px), (max-width: 600px) {
-    body {
-        align-items: flex-start;
-        padding-top: 2rem;
-    }
+    body { align-items: flex-start; padding-top: 2rem; }
 }
