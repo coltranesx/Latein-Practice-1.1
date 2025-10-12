@@ -67,9 +67,13 @@ h1, h2 {
 .btn-answer.correct { background-color: var(--soft-green); color: white; }
 .btn-answer.wrong { background-color: var(--soft-red); color: white; }
 
-/* EKLENEN KURAL: Mobil cihazlarda tıklama sonrası kalan mavi vurguyu kaldırır */
-.btn-answer:focus, .btn-answer:focus-visible {
-    outline: none;
+/* GÜÇLENDİRİLMİŞ KURAL: Mobil cihazlarda tıklama sonrası kalan mavi vurguyu kaldırır */
+.btn-answer, .btn-icon, .btn {
+    -webkit-tap-highlight-color: transparent; /* iOS ve Android için dokunma vurgusunu kaldırır */
+}
+.btn-answer:focus, .btn-answer:focus-visible, .btn-answer:active {
+    outline: none; /* Odaklanma çerçevesini kaldırır */
+    box-shadow: none; /* Bazı tarayıcıların eklediği gölgeyi kaldırır */
 }
 
 #pass-btn { background-color: var(--orange-accent); }

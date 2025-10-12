@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const restartBtn = document.getElementById('restart-btn');
     const helpBtn = document.getElementById('help-btn');
     const passBtn = document.getElementById('pass-btn');
-    const exitBtn = document.getElementById('exit-btn'); // YENİ
+    const exitBtn = document.getElementById('exit-btn');
     const questionWordEl = document.getElementById('question-word');
     const answerButtons = document.querySelectorAll('.btn-answer');
     const scoreEl = document.getElementById('score');
@@ -56,11 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Olay Dinleyicileri
     startBtn.addEventListener('click', startGame);
     restartBtn.addEventListener('click', startGame);
     passBtn.addEventListener('click', passQuestion);
-    exitBtn.addEventListener('click', exitGame); // YENİ
+    exitBtn.addEventListener('click', exitGame);
     answerButtons.forEach(button => button.addEventListener('click', selectAnswer));
 
     document.querySelectorAll('.btn, .btn-icon').forEach(button => {
@@ -73,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModalBtn.addEventListener('click', closeModal);
     window.addEventListener('click', (event) => { if (event.target == helpModal) { closeModal(); } });
 
-    // YENİ OYUNDAN ÇIKIŞ FONKSİYONU
     function exitGame() {
         clearTimeout(timerInterval);
         if(ambientSound) ambientSound.pause();
@@ -140,6 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetState() {
         clearTimeout(timerInterval);
+        if (document.activeElement) {
+             document.activeElement.blur(); // EKRANDA AKTİF OLAN ELEMENTTEN ODAKLANMAYI KALDIR
+        }
         answerButtons.forEach(button => {
             button.className = 'btn btn-answer';
             delete button.dataset.correct;
@@ -155,18 +156,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isCorrect) {
             score += 10;
             playSound(correctSound);
+            selectedBtn.classList.add('correct');
         } else {
             score -= 5;
             playSound(wrongSound);
+            selectedBtn.classList.add('wrong');
+            const correctBtn = Array.from(answerButtons).find(btn => btn.dataset.correct === 'true');
+            if (correctBtn) {
+                correctBtn.classList.add('correct');
+            }
         }
         scoreEl.innerText = score;
-        selectedBtn.classList.add(isCorrect ? 'correct' : 'wrong');
         
         answerButtons.forEach(button => {
             button.disabled = true;
-            if(button.dataset.correct === 'true') {
-                button.classList.add('correct');
-            }
         });
         
         setTimeout(() => {
