@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latein Practice 1.0</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Başlangıç Ekranı -->
+        <div id="welcome-screen">
+            <h1>Latein Practice 1.0</h1>
+            <h2>Willkommen!</h2>
+            <button id="start-btn" class="btn">Start</button>
+            <button id="help-btn" class="btn">Hilfe</button>
+        </div>
+        <!-- Oyun Ekranı -->
+        <div id="game-screen" class="hidden">
+            <div id="game-header">
+                <p>Punkte: <span id="score">0</span></p>
+                <p>Frage: <span id="question-counter">0 / 10</span></p>
+            </div>
+            <div id="timer-container">
+                <div id="timer-bar"></div>
+            </div>
+            <h2 id="question-word"></h2>
+            <div id="answer-buttons">
+                <button class="btn btn-answer"></button>
+                <button class="btn btn-answer"></button>
+                <button class="btn btn-answer"></button>
+                <button class="btn btn-answer"></button>
+            </div>
+            <button id="pass-btn" class="btn">Passen (1)</button>
+        </div>
+        <!-- Sonuç Ekranı -->
+        <div id="score-screen" class="hidden">
+            <h2>Spiel beendet!</h2>
+            <h2 class="congrats-message">Glückwunsch!</h2> <!-- EKLENEN SATIR -->
+            <p class="final-score-text">Dein Ergebnis:</p>
+            <p id="final-score">0</p>
+            <button id="restart-btn" class="btn">Nochmal spielen</button>
+        </div>
+    </div>
+    
+    <!-- Yardım Penceresi (Modal) -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Spielregeln</h3>
+            <p>- Du hast 10 Fragen, um dein Lateinwissen zu testen.</p>
+            <p>- Für jede Frage hast du 15 Sekunden Zeit.</p>
+            <p>- <strong>Richtige Antwort:</strong> +10 Punkte</p>
+            <p>- <strong>Falsche Antwort:</strong> -5 Punkte</p>
+            <p>- Wenn die Zeit abläuft, gibt es 0 Punkte.</p>
+            <p>- Du hast das Recht, eine Frage im gesamten Spiel zu <strong>überspringen</strong> (Passen).</p>
+        </div>
+    </div>
+
+    <!-- Ses Efektleri -->
+    <audio id="ambient-sound" src="sounds/ambient.mp3" loop></audio>
+    <audio id="click-sound" src="sounds/click.mp3"></audio>
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="wrong-sound" src="sounds/wrong.mp3"></audio>
+    <audio id="end-sound" src="sounds/end.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
