@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { latin: 'praenōmen', german: 'Vorname' }
     ];
 
+    // Element Seçimleri
     const welcomeScreen = document.getElementById('welcome-screen');
     const gameScreen = document.getElementById('game-screen');
     const scoreScreen = document.getElementById('score-screen');
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const restartBtn = document.getElementById('restart-btn');
     const helpBtn = document.getElementById('help-btn');
     const passBtn = document.getElementById('pass-btn');
+    const exitBtn = document.getElementById('exit-btn'); // YENİ
     const questionWordEl = document.getElementById('question-word');
     const answerButtons = document.querySelectorAll('.btn-answer');
     const scoreEl = document.getElementById('score');
@@ -37,7 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerBar = document.getElementById('timer-bar');
     const helpModal = document.getElementById('help-modal');
     const closeModalBtn = document.querySelector('.close-btn');
-    
     const ambientSound = document.getElementById('ambient-sound');
     const clickSound = document.getElementById('click-sound');
     const correctSound = document.getElementById('correct-sound');
@@ -55,33 +56,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Olay Dinleyicileri
     startBtn.addEventListener('click', startGame);
     restartBtn.addEventListener('click', startGame);
     passBtn.addEventListener('click', passQuestion);
+    exitBtn.addEventListener('click', exitGame); // YENİ
     answerButtons.forEach(button => button.addEventListener('click', selectAnswer));
 
-    document.querySelectorAll('.btn').forEach(button => {
+    document.querySelectorAll('.btn, .btn-icon').forEach(button => {
         button.addEventListener('click', () => playSound(clickSound));
     });
 
-    helpBtn.addEventListener('click', () => {
-        helpModal.classList.add('visible');
-    });
+    helpBtn.addEventListener('click', () => { helpModal.classList.add('visible'); });
 
-    function closeModal() {
-        helpModal.classList.remove('visible');
-    }
+    function closeModal() { helpModal.classList.remove('visible'); }
     closeModalBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (event) => {
-        if (event.target == helpModal) {
-            closeModal();
-        }
-    });
+    window.addEventListener('click', (event) => { if (event.target == helpModal) { closeModal(); } });
+
+    // YENİ OYUNDAN ÇIKIŞ FONKSİYONU
+    function exitGame() {
+        clearTimeout(timerInterval);
+        if(ambientSound) ambientSound.pause();
+        gameScreen.classList.add('hidden');
+        welcomeScreen.classList.remove('hidden');
+    }
 
     function startGame() {
-        score = 0;
-        questionIndex = 0;
-        passUsed = false;
+        score = 0; questionIndex = 0; passUsed = false;
         shuffledQuestions = wordList.sort(() => 0.5 - Math.random()).slice(0, TOTAL_QUESTIONS);
         scoreEl.innerText = score;
         passBtn.disabled = false;
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const currentQuestion = shuffledQuestions[questionIndex];
         questionWordEl.innerText = currentQuestion.latin;
-        questionCounterEl.innerText = `${questionIndex + 1} / ${TOTAL_QUESTIONS}`;
+        document.getElementById('question-counter').innerText = `${questionIndex + 1} / ${TOTAL_QUESTIONS}`;
         const options = generateOptions(currentQuestion);
 
         answerButtons.forEach((button, index) => {
@@ -128,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         clearTimeout(timerInterval);
         timerBar.style.transition = 'none';
         timerBar.style.width = '100%';
-        timerBar.offsetHeight;
+        timerBar.offsetHeight; 
         timerBar.style.transition = `width ${TIME_PER_QUESTION}s linear`;
         timerBar.style.width = '0%';
         timerInterval = setTimeout(() => {
@@ -153,17 +154,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isCorrect) {
             score += 10;
-            selectedBtn.classList.add('correct');
             playSound(correctSound);
         } else {
             score -= 5;
-            selectedBtn.classList.add('wrong');
             playSound(wrongSound);
-            const correctBtn = Array.from(answerButtons).find(btn => btn.dataset.correct === 'true');
-            if(correctBtn) correctBtn.classList.add('correct');
         }
         scoreEl.innerText = score;
-        answerButtons.forEach(button => button.disabled = true);
+        selectedBtn.classList.add(isCorrect ? 'correct' : 'wrong');
+        
+        answerButtons.forEach(button => {
+            button.disabled = true;
+            if(button.dataset.correct === 'true') {
+                button.classList.add('correct');
+            }
+        });
         
         setTimeout(() => {
             questionIndex++;

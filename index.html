@@ -15,11 +15,15 @@
             <button id="start-btn" class="btn">Start</button>
             <button id="help-btn" class="btn">Hilfe</button>
         </div>
-        <!-- Oyun Ekranı -->
+        <!-- Oyun Ekranı (YENİ YAPI) -->
         <div id="game-screen" class="hidden">
-            <div id="game-header">
-                <p>Punkte: <span id="score">0</span></p>
-                <p>Frage: <span id="question-counter">0 / 10</span></p>
+            <div id="game-top-bar">
+                <button id="exit-btn" class="btn-icon">X</button>
+                <p id="question-counter-display">Frage: <span id="question-counter">0 / 10</span></p>
+            </div>
+            <div id="main-score-display">
+                <span id="score">0</span>
+                <p>Punkte</p>
             </div>
             <div id="timer-container">
                 <div id="timer-bar"></div>
@@ -36,7 +40,7 @@
         <!-- Sonuç Ekranı -->
         <div id="score-screen" class="hidden">
             <h2>Spiel beendet!</h2>
-            <h2 class="congrats-message">Glückwunsch!</h2> <!-- EKLENEN SATIR -->
+            <h2 class="congrats-message">Glückwunsch!</h2>
             <p class="final-score-text">Dein Ergebnis:</p>
             <p id="final-score">0</p>
             <button id="restart-btn" class="btn">Nochmal spielen</button>
