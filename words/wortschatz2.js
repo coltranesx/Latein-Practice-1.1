@@ -1,0 +1,43 @@
+window.wordLists = window.wordLists || [];
+
+window.wordLists.push({
+    id: 'wortschatz2',
+    title: 'Wortschatz 2: Verben & Substantive',
+    words: [
+        { latin: 'monēre', german: '(er)mahnen, erinnern' },
+        { latin: 'laudāre', german: 'loben' },
+        { latin: 'epistula', german: 'der Brief' },
+        { latin: 'tabula', german: 'die Tafel, das Gemälde' },
+        { latin: 'intrāre', german: 'betreten, eintreten' },
+        { latin: 'salūtāre', german: 'grüßen, begrüßen' },
+        { latin: 'salvē/salvēte', german: 'sei gegrüßt!/seid gegrüßt!' },
+        { latin: 'subitō', german: 'plötzlich' },
+        { latin: 'rogāre', german: 'fragen, bitten' },
+        { latin: 'ego', german: 'ich' },
+        { latin: 'vidēre', german: 'sehen' },
+        { latin: 'audire', german: 'hören, anhören' },
+        { latin: 'tū', german: 'du' },
+        { latin: 'studēre', german: 'sich bemühen, wünschen' },
+        { latin: 'fābula', german: 'die Geschichte, die Erzählung' },
+        { latin: 'manēre', german: 'bleiben, warten' },
+        { latin: 'exspectāre', german: 'warten (auf), erwarten' },
+        { latin: 'libenter', german: 'gern' },
+        { latin: 'nunc', german: 'nun, jetzt' },
+        { latin: 'tacēre', german: 'still sein, schweigen' },
+        { latin: 'bene', german: 'gut' },
+        { latin: 'nescīre', german: 'nicht wissen, nicht kennen' },
+        { latin: 'convenire', german: 'zusammenkommen, treffen' },
+        { latin: 'quid?', german: 'was?' },
+        { latin: 'timēre', german: 'fürchten, sich fürchten' },
+        { latin: 'venia', german: 'die Nachsicht, die Verzeihung' },
+        { latin: 'veniam rogāre', german: 'um Verzeihung bitten' },
+        { latin: 'statim', german: 'sofort, auf der Stelle' },
+        { latin: 'forās', german: 'heraus, hinaus' },
+        { latin: 'discipulus', german: 'der Schüler' },
+        { latin: 'grammaticus', german: 'der Literaturlehrer' },
+        { latin: 'lūdus', german: 'das Spiel; die Schule' },
+        { latin: 'magister', german: 'der Lehrer' },
+        { latin: 'schola', german: 'der Unterricht' },
+        { latin: 'stilus', german: 'der (Metall-)Griffel' }
+    ]
+});

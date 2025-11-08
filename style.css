@@ -1,94 +1,108 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-/* RENK PALETİ */
-:root {
-    --bg-color: #f8f9fa;
-    --container-bg: #ffffff;
-    --primary-text: #495057;
-    --title-text: #343a40;
-    --primary-blue: #4a90e2;
-    --primary-blue-hover: #357ABD;
-    --soft-green: #28a745;
-    --soft-red: #dc3545;
-    --neutral-gray: #e9ecef;
-    --orange-accent: #f5a623;
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+    color: #333;
 }
 
-body {
-    font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; margin: 0; background-color: var(--bg-color); color: var(--primary-text);
-}
 .container {
-    width: 90%; max-width: 600px; background-color: var(--container-bg); padding: 2rem;
-    border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); text-align: center;
+    width: 90%;
+    max-width: 600px;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
 }
-h1, h2 { color: var(--title-text); }
-.hidden { display: none !important; }
+
+h1, h2 {
+    color: #2c3e50;
+}
+
+.hidden {
+    display: none !important;
+}
 
 /* Butonlar */
 .btn {
     display: inline-block; padding: 12px 25px; margin: 10px; border: none;
-    border-radius: 8px; background-color: var(--primary-blue); color: white;
+    border-radius: 8px; background-color: #3498db; color: white;
     font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s, transform 0.2s;
 }
-.btn:hover { background-color: var(--primary-blue-hover); transform: translateY(-px); }
+.btn:hover { background-color: #2980b9; transform: translateY(-2px); }
+.btn:disabled { background-color: #bdc3c7; cursor: not-allowed; transform: none; }
 
-/* OYUN ARAYÜZÜ STİLLERİ */
-#game-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-.btn-icon { background: none; border: 1px solid var(--neutral-gray); color: var(--primary-text); width: 40px; height: 40px; padding: 0; font-size: 1.2rem; line-height: 40px; text-align: center; }
-.btn-icon:hover { background-color: var(--neutral-gray); }
-#question-counter-display { font-weight: bold; }
+/* Seçim Ekranı Stilleri */
+.selection-info { margin-bottom: 1.5rem; }
+#word-list-options {
+    display: flex; flex-direction: column; gap: 1rem;
+    margin-bottom: 1.5rem; text-align: left;
+}
+.checkbox-item {
+    background-color: #f8f9fa; padding: 1rem; border-radius: 8px;
+    cursor: pointer; display: flex; align-items: center; transition: background-color 0.2s;
+}
+.checkbox-item:hover { background-color: #e9ecef; }
+.checkbox-item input[type="checkbox"] {
+    margin-right: 1rem; width: 20px; height: 20px; accent-color: #3498db;
+}
+.checkbox-item label { font-size: 1.1rem; flex-grow: 1; cursor: pointer; }
 
-#main-score-display { margin-bottom: 1rem; }
-#main-score-display span { font-size: 4rem; font-weight: bold; color: var(--primary-blue); }
-#main-score-display p { margin: -10px 0 0 0; color: var(--primary-text); }
 
-#timer-container { width: 100%; background-color: var(--neutral-gray); border-radius: 10px; margin-bottom: 1.5rem; }
-#timer-bar { height: 10px; width: 100%; background-color: var(--soft-green); border-radius: 10px; transition: width 1s linear; }
-#question-word { font-size: 2.5rem; margin: 1.5rem 0; color: var(--title-text); }
+/* Oyun Ekranı */
+#game-header {
+    display: flex; justify-content: space-between;
+    font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;
+}
+.btn-icon {
+    position: absolute; top: 15px; left: 15px;
+    background: none; border: 1px solid #ccc; color: #888;
+    width: 35px; height: 35px; padding: 0; font-size: 1.1rem;
+    line-height: 35px; text-align: center; border-radius: 50%;
+}
+.btn-icon:hover { background-color: #f0f2f5; }
+
+#timer-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; margin-bottom: 1.5rem; }
+#timer-bar { height: 10px; width: 100%; background-color: #2ecc71; border-radius: 10px; transition: width 1s linear; }
+#question-word { font-size: 2.5rem; margin: 2rem 0; color: #e74c3c; }
 #answer-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1.5rem; }
 
-/* === NİHAİ ÇÖZÜM İÇİN CSS KODLARI === */
-.btn-answer {
-    background-color: var(--neutral-gray);
-    color: var(--title-text);
-    font-size: 1rem;
-    padding: 15px;
-    -webkit-tap-highlight-color: transparent; /* iOS/Android dokunma vurgusunu kaldır */
-}
-/* Mobil'deki "yapışkan hover" sorununu çözmek için hover durumunda da rengi sabit tutuyoruz */
-.btn-answer:hover, .btn-answer:focus, .btn-answer:active {
-    background-color: var(--neutral-gray); /* Rengin değişmesini engelle */
-    color: var(--title-text);
-    outline: none;
-    box-shadow: none;
-}
-.btn-answer.correct, .btn-answer.correct:hover {
-    background-color: var(--soft-green) !important; /* !important ile baskın gelmesini garantile */
-    color: white !important;
-}
-.btn-answer.wrong, .btn-answer.wrong:hover {
-    background-color: var(--soft-red) !important; /* !important ile baskın gelmesini garantile */
-    color: white !important;
-}
-/* === ÇÖZÜM SONU === */
+.btn-answer { background-color: #95a5a6; font-size: 1rem; padding: 15px; -webkit-tap-highlight-color: transparent; }
+.btn-answer:hover { background-color: #7f8c8d; }
+.btn-answer.correct, .btn-answer.correct:hover { background-color: #2ecc71 !important; color: white !important; }
+.btn-answer.wrong, .btn-answer.wrong:hover { background-color: #e74c3c !important; color: white !important; }
+.btn-answer:focus, .btn-answer:active { outline: none; box-shadow: none; }
 
-#pass-btn { background-color: var(--orange-accent); }
+#pass-btn { background-color: #f39c12; }
+#pass-btn:hover { background-color: #e67e22; }
 #pass-btn:disabled { background-color: #bdc3c7; cursor: not-allowed; }
-#pass-btn:hover { background-color: #d88e1a; }
 
 /* Sonuç Ekranı */
-.congrats-message { color: var(--soft-green); margin-top: 0; margin-bottom: 1.5rem; }
+.congrats-message { color: #27ae60; margin-top: 0; margin-bottom: 1.5rem; }
 .final-score-text { font-size: 1.5rem; margin-bottom: 0; }
-#final-score { font-size: 6rem; font-weight: bold; color: var(--primary-blue); margin-top: 0; }
+#final-score { font-size: 6rem; font-weight: bold; color: #3498db; margin-top: 0; }
 
 /* Yardım Penceresi */
-.modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+.modal {
+    display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%;
+    overflow: auto; background-color: rgba(0,0,0,0.5);
+}
 .modal.visible { display: flex; justify-content: center; align-items: center; }
-.modal-content { background-color: #fefefe; margin: auto; padding: 20px 30px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 10px; position: relative; text-align: left; }
-.close-btn { color: #aaa; position: absolute; top: 10px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
-
-/* MOBİL İÇİN ÜST BOŞLUK DÜZELTMESİ */
+.modal-content {
+    background-color: #fefefe; margin: auto; padding: 20px 30px; border: 1px solid #888;
+    width: 80%; max-width: 500px; border-radius: 10px; position: relative; text-align: left;
+}
+.close-btn {
+    color: #aaa; position: absolute; top: 10px; right: 20px;
+    font-size: 28px; font-weight: bold; cursor: pointer;
+}
 @media (max-height: 800px), (max-width: 600px) {
     body { align-items: flex-start; padding-top: 2rem; }
 }
