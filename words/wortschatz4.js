@@ -2,7 +2,7 @@ window.wordLists = window.wordLists || [];
 
 window.wordLists.push({
     id: 'wortschatz4',
-    title: 'Wortschatz 4: Yaşam ve Sorular',
+    title: 'Wortschatz 4: Leben und Fragen',
     words: [
         // S. 26
         { latin: 'habitāre', german: 'wohnen, bewohnen' },

@@ -2,7 +2,7 @@ window.wordLists = window.wordLists || [];
 
 window.wordLists.push({
     id: 'wortschatz3',
-    title: 'Wortschatz 3: Forum ve Termen',
+    title: 'Wortschatz 3: Forum und Thermen',
     words: [
         // S. 22
         { latin: 'ōrātor m', german: 'der Redner' },
