@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function playSound(sound) {
         if (sound) {
             sound.currentTime = 0;
-            sound.play().catch(e => console.log("Ses çalınamadı:", e));
+            sound.play().catch(e => console.log("Audio konnte nicht abgespielt werden:", e));
         }
     }
 
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (activeGameWords.length < 4) {
-            alert("Lütfen en az 4 kelime içeren bir grup seçin!");
+            alert("Bitte wähle eine Gruppe mit mindestens 4 Wörtern aus!");
             return;
         }
 
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (ambientSound) {
             ambientSound.volume = 0.3;
-            ambientSound.play().catch(e => console.log("Arkaplan sesi çalınamadı:", e));
+            ambientSound.play().catch(e => console.log("Hintergrundmusik konnte nicht abgespielt werden:", e));
         }
         showNextQuestion();
     }
@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', () => {
         if (welcomeScreen.classList.contains('hidden') === false && ambientSound) {
             ambientSound.volume = 0.3;
-            ambientSound.play().catch(e => console.log("Otomatik oynatma engellendi:", e));
+            ambientSound.play().catch(e => console.log("Automatische Wiedergabe blockiert:", e));
         }
     }, { once: true });
 });
