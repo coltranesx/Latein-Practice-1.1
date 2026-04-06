@@ -1,0 +1,13 @@
+{
+  "name": "latein-practice-1.1",
+  "version": "1.1.0",
+  "description": "Latein Vokabeltrainer",
+  "main": "script.js",
+  "scripts": {
+    "map": "node scripts/generate_arch_map.js",
+    "dev": "npx -y http-server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

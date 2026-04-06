@@ -23,12 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const correctSound = document.getElementById('correct-sound');
     const wrongSound = document.getElementById('wrong-sound');
     const endSound = document.getElementById('end-sound');
+    const musicToggleBtn = document.getElementById('music-toggle-btn');
 
     // Genel Değişkenler
     const TOTAL_QUESTIONS = 10;
     const TIME_PER_QUESTION = 15;
     let score, questionIndex, shuffledQuestions, passUsed, timerInterval;
     let activeGameWords = [];
+    let isMuted = false;
 
     // --- Fonksiyonlar ---
     function populateSelectionScreen() {
@@ -101,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scoreScreen.classList.add('hidden');
         gameScreen.classList.remove('hidden');
 
-        if (ambientSound) {
+        if (ambientSound && !isMuted) {
             ambientSound.volume = 0.3;
             ambientSound.play().catch(e => console.log("Hintergrundmusik konnte nicht abgespielt werden:", e));
         }
@@ -215,6 +217,20 @@ document.addEventListener('DOMContentLoaded', () => {
         playSound(endSound);
     }
 
+    function toggleMusic() {
+        console.log("Müzik toggle tıklandı. Durum:", !isMuted); 
+        isMuted = !isMuted;
+        musicToggleBtn.innerText = isMuted ? '🔇' : '🔊';
+        if (isMuted) {
+            if (ambientSound) ambientSound.pause();
+        } else {
+            if (ambientSound) {
+                ambientSound.volume = 0.3;
+                ambientSound.play().catch(e => console.log("Musik konnte nicht gestartet werden:", e));
+            }
+        }
+    }
+
     // --- Olay Dinleyici Atamaları ---
     startBtn.addEventListener('click', () => {
         welcomeScreen.classList.add('hidden');
@@ -232,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
     passBtn.addEventListener('click', passQuestion);
     exitBtn.addEventListener('click', exitGame);
     answerButtons.forEach(button => button.addEventListener('click', selectAnswer));
+    musicToggleBtn.addEventListener('click', toggleMusic);
     document.querySelectorAll('.btn, .btn-icon').forEach(button => {
         button.addEventListener('click', () => playSound(clickSound));
     });
@@ -245,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     document.body.addEventListener('click', () => {
-        if (welcomeScreen.classList.contains('hidden') === false && ambientSound) {
+        if (welcomeScreen.classList.contains('hidden') === false && ambientSound && !isMuted) {
             ambientSound.volume = 0.3;
             ambientSound.play().catch(e => console.log("Automatische Wiedergabe blockiert:", e));
         }
